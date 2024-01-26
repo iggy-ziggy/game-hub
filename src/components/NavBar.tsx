@@ -15,3 +15,7 @@ export default NavBar
 
 // Notes:
     // HStack is a Chakra UI component - 'horizontal stack'
+    // Image is also a Chakra UI component
+        // we cannot reference the src by its relative path - it must be imported like any other component then referenced
+            // boxSize is, obviously, part of Chakra UI
+        // Text is, you guessed it, another Chakra UI component
