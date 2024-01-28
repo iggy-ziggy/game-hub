@@ -3,9 +3,9 @@ import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 
 export interface Platform {
-    id: number;
-    name: string;
-    slug: string;
+  id: number;
+  name: string;
+  slug: string;
 }
 
 // we export this here so that it can be used elsewhere (in the GameCard component)
@@ -26,33 +26,39 @@ interface FetchGamesResponse {
 const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
 
+    setLoading(true);
+
     apiClient
       .get<FetchGamesResponse>("/games", { signal: controller.signal })
-      .then((res) => setGames(res.data.results))
+      .then((res) => {
+        setGames(res.data.results);
+        setLoading(false);
+      })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setLoading(false);
       });
 
     return () => controller.abort();
   }, []);
 
-  return { games, error };
+  return { games, error, isLoading };
 };
 
 export default useGames;
 
-
 // NOTES:
 
-    // in the Games interface, we are referencing the parent_platform in a peculiar manner
-    // it's because the API we're using is returning this data in a peculiar manner
-    // instead of returning an array of parent_platform objects, it's rerturning an array of objects with the key of 'platform:' and an object as the value
-    // SO: we can't reference it as 'parent_platform: Platform[]' like we have in other interfaces
-    // we must reference it as 'parent_platform: { platform: Platform }[]'
-    // which is to say: it is an array of objects with a key of 'platform' which is of type 'Platform' (which refers to the interface we made above)
-    // woof...
+// in the Games interface, we are referencing the parent_platform in a peculiar manner
+// it's because the API we're using is returning this data in a peculiar manner
+// instead of returning an array of parent_platform objects, it's rerturning an array of objects with the key of 'platform:' and an object as the value
+// SO: we can't reference it as 'parent_platform: Platform[]' like we have in other interfaces
+// we must reference it as 'parent_platform: { platform: Platform }[]'
+// which is to say: it is an array of objects with a key of 'platform' which is of type 'Platform' (which refers to the interface we made above)
+// woof...
