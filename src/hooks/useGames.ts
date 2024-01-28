@@ -15,6 +15,7 @@ export interface Game {
   background_image: string;
   // see note at bottom about this 'parent_platform' line...
   parent_platforms: { platform: Platform }[];
+  metacritic: number;
 }
 
 interface FetchGamesResponse {
