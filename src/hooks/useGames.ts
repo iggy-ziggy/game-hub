@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
-import useData from "./useData";
-import { Genre } from "./useGenres";
+import apiClient from "../services/api-client";
+import { FetchResponse } from "../services/api-client";
 
 export interface Platform {
   id: number;
@@ -19,21 +20,21 @@ export interface Game {
   rating_top: number;
 }
 
-const useGames = (
-  gameQuery: GameQuery
-) =>
-  useData<Game>(
-    "/games",
-    {
-      params: {
-        genres: gameQuery.genre?.id,
-        parent_platforms: gameQuery.platform?.id,
-        ordering: gameQuery.sortOrder,
-        search: gameQuery.searchText,
-      },
-    },
-    [gameQuery]
-  );
+const useGames = (gameQuery: GameQuery) =>
+  useQuery<FetchResponse<Game>, Error>({
+    queryKey: ["games", gameQuery],
+    queryFn: () =>
+      apiClient
+        .get<FetchResponse<Game>>("/games", {
+          params: {
+            genres: gameQuery.genre?.id,
+            parent_platforms: gameQuery.platform?.id,
+            ordering: gameQuery.sortOrder,
+            search: gameQuery.searchText,
+          },
+        })
+        .then(res => res.data),
+  });
 
 export default useGames;
 
@@ -42,12 +43,12 @@ export default useGames;
 // in the Games interface, we are referencing the parent_platform in a peculiar manner
 // it's because the API we're using is returning this data in a peculiar manner
 // instead of returning an array of parent_platform objects, it's rerturning an array of objects with the key of 'platform:' and an object as the value
-  // SO: we can't reference it as 'parent_platform: Platform[]' like we have in other interfaces
-  // we must reference it as 'parent_platform: { platform: Platform }[]'
-  // which is to say: it is an array of objects with a key of 'platform' which is of type 'Platform' (which refers to the interface we made above)
-  // woof...
+// SO: we can't reference it as 'parent_platform: Platform[]' like we have in other interfaces
+// we must reference it as 'parent_platform: { platform: Platform }[]'
+// which is to say: it is an array of objects with a key of 'platform' which is of type 'Platform' (which refers to the interface we made above)
+// woof...
 
 // useData() params:
-    // these will be the url query parameters, so each key should be what is listed in the API documentation
-    // this API has an endpoint called 'page_size', so we would need to add that exactly in this params object
-      // ex: 'page_size: 5,'
+// these will be the url query parameters, so each key should be what is listed in the API documentation
+// this API has an endpoint called 'page_size', so we would need to add that exactly in this params object
+// ex: 'page_size: 5,'
