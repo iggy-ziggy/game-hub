@@ -34,9 +34,11 @@ const GameGrid = ({ gameQuery }: Props) => {
       next={() => fetchNextPage()}
       loader={<Spinner />}
       endMessage={
+        !isLoading ?
         <p style={{ textAlign: "center" }}>
           End of results. Well done, that was a lot to scroll through.
         </p>
+        : null
       }
     >
       <SimpleGrid
