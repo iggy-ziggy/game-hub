@@ -1,4 +1,5 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import ms from "ms";
 import { GameQuery } from "../App";
 import APIClient, { FetchResponse } from "../services/api-client";
 import { Platform } from "./usePlatforms";
@@ -32,7 +33,7 @@ const useGames = (gameQuery: GameQuery) =>
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.next ? allPages.length + 1 : undefined;
     },
-    staleTime: 24 * 60 * 60 * 1000, // 24h
+    staleTime: ms('24h')
   });
 
 export default useGames;
@@ -51,3 +52,10 @@ export default useGames;
 // these will be the url query parameters, so each key should be what is listed in the API documentation
 // this API has an endpoint called 'page_size', so we would need to add that exactly in this params object
 // ex: 'page_size: 5,'
+
+
+// MS 
+  // `ms` is a very lightweight package that will convert strings into milliseconds
+  // given its documentation, a string of '#h' such as '24h' will return the number of milliseconds in that number
+  // minutes, seconds, days etc. can also be used, but each has its own format 
+  // google 'npm ms' to find the docs
