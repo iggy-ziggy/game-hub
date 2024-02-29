@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
-import { GameQuery } from "../App";
 import APIClient, { FetchResponse } from "../services/api-client";
+import useGameQueryStore from "../store";
 import { Platform } from "./usePlatforms";
 
 const apiClient = new APIClient<Game>("/games");
@@ -17,8 +17,10 @@ export interface Game {
   rating_top: number;
 }
 
-const useGames = (gameQuery: GameQuery) =>
-  useInfiniteQuery<FetchResponse<Game>, Error>({
+const useGames = () => {
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
+
+  return useInfiniteQuery<FetchResponse<Game>, Error>({
     queryKey: ["games", gameQuery],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
@@ -33,8 +35,9 @@ const useGames = (gameQuery: GameQuery) =>
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.next ? allPages.length + 1 : undefined;
     },
-    staleTime: ms('24h')
+    staleTime: ms("24h"),
   });
+};
 
 export default useGames;
 
@@ -53,9 +56,8 @@ export default useGames;
 // this API has an endpoint called 'page_size', so we would need to add that exactly in this params object
 // ex: 'page_size: 5,'
 
-
-// MS 
-  // `ms` is a very lightweight package that will convert strings into milliseconds
-  // given its documentation, a string of '#h' such as '24h' will return the number of milliseconds in that number
-  // minutes, seconds, days etc. can also be used, but each has its own format 
-  // google 'npm ms' to find the docs
+// MS
+// `ms` is a very lightweight package that will convert strings into milliseconds
+// given its documentation, a string of '#h' such as '24h' will return the number of milliseconds in that number
+// minutes, seconds, days etc. can also be used, but each has its own format
+// google 'npm ms' to find the docs
