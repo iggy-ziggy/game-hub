@@ -1,5 +1,6 @@
 import React from "react";
 import { Game } from "../hooks/useGames";
+import { Link } from "react-router-dom";
 import { Card, CardBody, Heading, HStack, Image, Text } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
@@ -21,7 +22,12 @@ const GameCard = ({ game }: Props) => {
           />
           <CriticScore score={game.metacritic} />
         </HStack>
-        <Heading fontSize="2xl">{game.name}<Emoji rating={game.rating_top}/></Heading>
+        <Heading fontSize="2xl">
+          <Link to={'/games/' + game.slug}>
+          {game.name}
+          </Link>
+          <Emoji rating={game.rating_top} />
+        </Heading>
       </CardBody>
     </Card>
   );
