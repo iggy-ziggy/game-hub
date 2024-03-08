@@ -1,5 +1,3 @@
-import { Spinner } from "@chakra-ui/react";
-import React from "react";
 import useTrailers from "../hooks/useTrailers";
 
 interface Props {

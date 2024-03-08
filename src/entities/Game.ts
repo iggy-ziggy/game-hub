@@ -1,10 +1,10 @@
-import { Genre } from "./Genre";
-import { Platform } from "./Platform";
-import { Publisher } from "./Publisher";
+import Genre from "./Genre";
+import Platform from "./Platform";
+import Publisher from "./Publisher";
 
 // we export this here so that it can be used elsewhere (in the GameCard component)
 
-export interface Game {
+export default interface Game {
   id: number;
   name: string;
   slug: string;
