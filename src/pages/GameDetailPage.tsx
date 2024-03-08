@@ -5,6 +5,7 @@ import DefinitionItem from "../components/DefinitionItem";
 import ExpandableText from "../components/ExpandableText";
 import GameAttributes from "../components/GameAttributes";
 import GameTrailer from "../components/GameTrailer";
+import GameScreenshots from "../components/GameScreenshots";
 import useGame from "../hooks/useGame";
 
 const GameDetailPage = () => {
@@ -19,8 +20,9 @@ const GameDetailPage = () => {
     <>
       <Heading>{game?.name}</Heading>
       <ExpandableText>{game?.description_raw}</ExpandableText>
-      <GameAttributes game={game}/>
-      <GameTrailer gameId={game.id}/>
+      <GameAttributes game={game} />
+      <GameTrailer gameId={game.id} />
+      <GameScreenshots gameId={game.id} />
     </>
   );
 };
