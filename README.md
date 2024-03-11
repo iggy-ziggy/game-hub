@@ -34,15 +34,15 @@ Clicking on the game title will take you to that game's page, which features a d
 
 * Home Page
 
-<img width="1242" alt="Screenshot 2024-03-11 at 11 35 42 AM" src="https://github.com/iggy-ziggy/game-hub/assets/128410000/14e9a73a-00d1-417e-ba62-1bd9ddb406e5">
+<img width="400" alt="Screenshot 2024-03-11 at 11 35 42 AM" src="https://github.com/iggy-ziggy/game-hub/assets/128410000/14e9a73a-00d1-417e-ba62-1bd9ddb406e5">
 
 * Sorted Main Page
 
-<img width="1242" alt="Screenshot 2024-03-11 at 11 38 04 AM" src="https://github.com/iggy-ziggy/game-hub/assets/128410000/a9794b7c-a6cc-4c8f-a0f9-55c953f251c4">
+<img width="400" alt="Screenshot 2024-03-11 at 11 38 04 AM" src="https://github.com/iggy-ziggy/game-hub/assets/128410000/a9794b7c-a6cc-4c8f-a0f9-55c953f251c4">
 
 * Individual Game Page
 
-<img width="1059" alt="Screenshot 2024-03-11 at 11 39 57 AM" src="https://github.com/iggy-ziggy/game-hub/assets/128410000/bf5c9bbb-4f83-49e0-aa67-17a39fb75243">
+<img width="400" alt="Screenshot 2024-03-11 at 11 39 57 AM" src="https://github.com/iggy-ziggy/game-hub/assets/128410000/bf5c9bbb-4f83-49e0-aa67-17a39fb75243">
 
 
 ## License
