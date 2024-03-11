@@ -30,6 +30,8 @@ Using the search bar in the nav, you can search for specific games.
 
 Clicking on the game title will take you to that game's page, which features a description, trailer (if available), and screenshots (again, if available).
 
+* Deployed App: https://game-hub-wine-ten.vercel.app/
+
 ### Images
 
 * Home Page
